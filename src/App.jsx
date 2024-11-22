@@ -13,11 +13,18 @@ function App() {
   // });
   
   //Example of useRef hook
-  const b = useRef(0)
+  // const b = useRef(0)
+  // useEffect(()=>{
+  //   b.current = b.current+1;
+  //   console.log(`rerendering the value of 'b' is ${b.current}......`)
+  // })
+
+  // Example of DOM manipulation using useRef() hook
+  const btnRef = useRef()
   useEffect(()=>{
-    b.current = b.current+1;
-    console.log(`rerendering the value of 'b' is ${b.current}......`)
-  })
+    console.log("First Rendering....")
+    btnRef.current.style.backgroundColor = "red";//setting background color red to button 
+  },[]);
   return (
     <>
       <div>
@@ -30,7 +37,8 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button ref={btnRef} onClick={() => setCount((count) => count + 1)}>
+        {/* setting background color red to button usung ref = {btnRef} */}
           count is {count}
         </button>
         <p>
@@ -40,6 +48,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <button onClick={() => btnRef.current.style.display = "none"}>Counter Disable</button>
     </>
   )
 }
